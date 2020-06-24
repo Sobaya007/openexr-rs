@@ -297,6 +297,26 @@ impl Header {
         self
     }
 
+    pub fn get_int_attribute(&self, name: &str) -> Option<i32> {
+        let c_name = CString::new(name.as_bytes()).unwrap();
+        let mut out = 0;
+        if unsafe { CEXR_Header_get_int_attribute(self.handle, c_name.as_ptr(), &mut out) } {
+            Some(out)
+        } else {
+            None
+        }
+    }
+
+    pub fn get_float_attribute(&self, name: &str) -> Option<f32> {
+        let c_name = CString::new(name.as_bytes()).unwrap();
+        let mut out = 0.0;
+        if unsafe { CEXR_Header_get_float_attribute(self.handle, c_name.as_ptr(), &mut out) } {
+            Some(out)
+        } else {
+            None
+        }
+    }
+
     pub(crate) fn validate_framebuffer_for_output(&self, framebuffer: &FrameBuffer) -> Result<()> {
         for chan in self.channels() {
             let (name, h_channel) = chan?;

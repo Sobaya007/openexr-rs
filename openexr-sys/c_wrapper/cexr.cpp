@@ -16,6 +16,8 @@
 #include "Iex.h"
 #include "ImfStandardAttributes.h"
 #include "ImfThreading.h"
+#include "ImfIntAttribute.h"
+#include "ImfFloatAttribute.h"
 #pragma GCC diagnostic pop
 
 #include "memory_istream.hpp"
@@ -225,6 +227,20 @@ void CEXR_Header_set_multiview(CEXR_Header *header, const CEXR_Slice* views, siz
 
 void CEXR_Header_erase_attribute(CEXR_Header *header, const char *attribute) {
     reinterpret_cast<Header *>(header)->erase(attribute);
+}
+
+bool CEXR_Header_get_int_attribute(const CEXR_Header *header, const char *attribute, int *out) {
+    auto attr = reinterpret_cast<const Header *>(header)->findTypedAttribute<IntAttribute>(attribute);
+    if(attr == nullptr) return false;
+    *out = attr->value();
+    return true;
+}
+
+bool CEXR_Header_get_float_attribute(const CEXR_Header *header, const char *attribute, float *out) {
+    auto attr = reinterpret_cast<const Header *>(header)->findTypedAttribute<FloatAttribute>(attribute);
+    if(attr == nullptr) return false;
+    *out = attr->value();
+    return true;
 }
 
 

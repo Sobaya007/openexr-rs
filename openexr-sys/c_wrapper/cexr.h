@@ -75,13 +75,13 @@ typedef enum CEXR_PixelType {
  *   [ImfTiledOutputFile.h]
  *   (https://github.com/openexr/openexr/blob/develop/OpenEXR/IlmImf/ImfTiledOutputFile.h)
  *   header for specifics.
- * 
+ *
  * * `DECREASING_Y`: the tiles are stored in a different particular order.
  *   See OpenEXR's
  *   [ImfTiledOutputFile.h]
  *   (https://github.com/openexr/openexr/blob/develop/OpenEXR/IlmImf/ImfTiledOutputFile.h)
  *   header for specifics.
- * 
+ *
  * * `RANDOM_Y`: the tiles are stored in the order written.
  *
  * For tiled files, `RANDOM_Y` is probably a good choice, as it gives you
@@ -99,7 +99,7 @@ typedef enum CEXR_LineOrder {
  * Compression mode of an OpenEXR file.
  *
  * These modes are lossless:
- * 
+ *
  * * `NO_COMPRESSION`
  * * `RLE_COMPRESSION`
  * * `ZIPS_COMPRESSION`
@@ -210,6 +210,8 @@ bool CEXR_Header_has_multiview(const CEXR_Header *header);
 size_t CEXR_Header_multiview(const CEXR_Header *header, CEXR_Slice *out);
 void CEXR_Header_set_multiview(CEXR_Header *header, const CEXR_Slice* views, size_t view_count);
 void CEXR_Header_erase_attribute(CEXR_Header *header, const char *attribute);
+bool CEXR_Header_get_int_attribute(const CEXR_Header *header, const char *attribute, int *out);
+bool CEXR_Header_get_float_attribute(const CEXR_Header *header, const char *attribute, float *out);
 
 
 CEXR_FrameBuffer *CEXR_FrameBuffer_new();

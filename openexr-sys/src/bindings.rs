@@ -506,6 +506,20 @@ extern "C" {
     );
 }
 extern "C" {
+    pub fn CEXR_Header_get_int_attribute(
+        header: *const CEXR_Header,
+        attribute: *const ::std::os::raw::c_char,
+        out: *mut ::std::os::raw::c_int
+    ) -> bool;
+}
+extern "C" {
+    pub fn CEXR_Header_get_float_attribute(
+        header: *const CEXR_Header,
+        attribute: *const ::std::os::raw::c_char,
+        out: *mut ::std::os::raw::c_float
+    ) -> bool;
+}
+extern "C" {
     pub fn CEXR_FrameBuffer_new() -> *mut CEXR_FrameBuffer;
 }
 extern "C" {
